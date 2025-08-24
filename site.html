@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos 6 Meses ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48cae4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: none;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.8)); }
+        }
+
+        .header p {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            animation: slideInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .question-card h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .question-card p {
+            color: #f8f9fa;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .photo-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .photo-placeholder {
+            width: 320px;
+            height: 220px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            border-radius: 20px;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: photoFloat 3s ease-in-out infinite;
+        }
+
+        .photo-placeholder::before {
+            content: "📷 Sua foto aqui";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .terminate-btn {
+            position: fixed;
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .terminate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(220, 53, 69, 0.95);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1001;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .quiz-container {
+            margin: 20px 0;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 4px 15px rgba(102, 126, 234, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .quiz-btn:hover::before {
+            left: 100%;
+        }
+
+        .quiz-btn.correct {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            animation: correctPulse 0.8s ease-in-out;
+            box-shadow: 0 0 20px rgba(86, 171, 47, 0.6);
+        }
+
+        .quiz-btn.wrong {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            animation: wrongShake 0.6s ease-in-out;
+            box-shadow: 0 0 20px rgba(255, 65, 108, 0.6);
+        }
+
+        .quiz-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .quiz-result {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 15px;
+            min-height: 30px;
+        }
+
+        .quiz-result.correct {
+            color: #28a745;
+        }
+
+        .quiz-result.wrong {
+            color: #dc3545;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(-5deg); }
+            75% { transform: translate(-50%, -50%) rotate(5deg); }
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2rem; }
+            .question-card { padding: 20px; }
+            .photo-placeholder { width: 250px; height: 170px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <button class="terminate-btn" id="terminateBtn">Terminar</button>
+    
+    <div class="message" id="message">SAI DAQUI! 😤</div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Nossos 6 Meses Juntos ❤️</h1>
+            <p>Uma jornada de amor e cumplicidade</p>
+        </div>
+
+        <div class="question-card">
+            <h2>🌟 O que mais amo em você</h2>
+            <p>Como você me faz rir todos os dias, seus lindos olhos que me hipnotizam, como você peida fedido e mesmo assim eu te amo kkkk, e por último sua enorme paciência comigo quando sou chato!</p>
+            <div class="photo-container">
+                <img src="https://drive.google.com/uc?id=1uVquX7tGenbx-spAhIxtjSpFEsEJYwdP" alt="Você que eu amo" style="width: 320px; height: 220px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: photoFloat 3s ease-in-out infinite;">
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h2>💋 Quando foi nosso primeiro beijo?</h2>
+            <div class="quiz-container">
+                <div class="quiz-options">
+                    <button class="quiz-btn" data-correct="false">26/12/2024</button>
+                    <button class="quiz-btn" data-correct="true">28/12/2024</button>
+                    <button class="quiz-btn" data-correct="false">30/12/2024</button>
+                </div>
+                <div class="quiz-result" id="quiz1-result"></div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h2>💕 Em que mês começamos a namorar?</h2>
+            <div class="quiz-container">
+                <div class="quiz-options">
+                    <button class="quiz-btn" data-correct="false">Fevereiro 2024</button>
+                    <button class="quiz-btn" data-correct="true">Março 2024</button>
+                    <button class="quiz-btn" data-correct="false">Abril 2024</button>
+                </div>
+                <div class="quiz-result" id="quiz2-result"></div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h2>🎵 Qual foi a primeira música que você me dedicou?</h2>
+            <div class="quiz-container">
+                <div class="quiz-options">
+                    <button class="quiz-btn" data-correct="false">Amor Verdadeiro - Jorge e Mateus</button>
+                    <button class="quiz-btn" data-correct="true">Whisky Vagabundo</button>
+                    <button class="quiz-btn" data-correct="false">5 Km - Henrique e Juliano</button>
+                </div>
+                <div class="quiz-result" id="quiz3-result"></div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h2>📸 Nossa primeira foto como casal</h2>
+            <p>Lembra dessa foto? Foi a primeira que tiramos oficialmente como namorados! Eu fico emocionado toda vez que olho para ela - nossos sorrisos dizem tudo sobre como estávamos felizes! ❤️</p>
+            <div class="photo-container">
+                <img src="https://drive.google.com/uc?id=1fEBnO56-JMhglCZSQHcz3Iw5z7zY9KIP" alt="Nossa primeira foto como casal" style="width: 320px; height: 220px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: photoFloat 3s ease-in-out infinite;">
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h2>💫 Nossos planos para o futuro</h2>
+            <p>Quero ficar rico pra te dar tudo que você merece, morar junto com você e ter nossa filha. E quando estivermos na nossa casa só nós dois, vamos ficar pelados o dia todo sendo safados kkkk</p>
+            <div class="photo-container">
+                <img src="https://drive.google.com/uc?id=1rRiwONu8iIGJsI8eaC3dFpG2VsKs-mEF" alt="Nossos planos juntos" style="width: 320px; height: 220px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: photoFloat 3s ease-in-out infinite;">
+            </div>
+        </div>
+
+        <div class="question-card">
+            <h2>❤️ Minha declaração final</h2>
+            <p>Amor, te amo muitooo! Não tem mais volta agora, você é minha mesmo! Vou te amar pro resto da vida e cuidar de você como você merece. Esses 6 meses foram os melhores da minha vida e eu quero muitos mais ao seu lado.</p>
+            <p>Você me faz feliz de um jeito que nem sei explicar. Te amo demais, minha vida! ❤️</p>
+            <div class="photo-container">
+                <img src="https://drive.google.com/uc?id=1heNPFiWJdPLpqvWa4O4-qlCGYBamfS7y" alt="Nós dois" style="width: 320px; height: 220px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: photoFloat 3s ease-in-out infinite;">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Criar corações flutuantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartSymbols = ['💕', '💖', '💗', '💝', '💘', '❤️'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Lógica do botão "Terminar"
+        const terminateBtn = document.getElementById('terminateBtn');
+        const message = document.getElementById('message');
+        let clickCount = 0;
+
+        // Posicionar botão inicialmente no canto superior direito
+        terminateBtn.style.top = '20px';
+        terminateBtn.style.right = '20px';
+
+        terminateBtn.addEventListener('click', function() {
+            clickCount++;
+            
+            // Mostrar mensagem
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 1500);
+            
+            // Mover botão para posição aleatória
+            const maxX = window.innerWidth - terminateBtn.offsetWidth - 10;
+            const maxY = window.innerHeight - terminateBtn.offsetHeight - 10;
+            
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            
+            terminateBtn.style.left = newX + 'px';
+            terminateBtn.style.top = newY + 'px';
+            terminateBtn.style.right = 'auto';
+            terminateBtn.style.bottom = 'auto';
+            
+            // Mudar texto do botão ocasionalmente
+            const phrases = ['Terminar', 'Sair', 'Cancelar', 'Fechar', 'Tchau'];
+            if (clickCount % 3 === 0) {
+                terminateBtn.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+            }
+        });
+
+        // Reposicionar botão se janela for redimensionada
+        window.addEventListener('resize', function() {
+            if (terminateBtn.style.left !== 'auto') {
+                const maxX = window.innerWidth - terminateBtn.offsetWidth - 10;
+                const maxY = window.innerHeight - terminateBtn.offsetHeight - 10;
+                
+                terminateBtn.style.left = Math.min(parseInt(terminateBtn.style.left), maxX) + 'px';
+                terminateBtn.style.top = Math.min(parseInt(terminateBtn.style.top), maxY) + 'px';
+            }
+        });
+
+        // Lógica dos quizzes
+        function setupQuiz() {
+            const quizButtons = document.querySelectorAll('.quiz-btn');
+            
+            quizButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const isCorrect = this.getAttribute('data-correct') === 'true';
+                    const quizContainer = this.closest('.quiz-container');
+                    const resultDiv = quizContainer.querySelector('.quiz-result');
+                    const allButtons = quizContainer.querySelectorAll('.quiz-btn');
+                    
+                    // Desabilitar todos os botões
+                    allButtons.forEach(btn => btn.disabled = true);
+                    
+                    if (isCorrect) {
+                        this.classList.add('correct');
+                        resultDiv.textContent = '🎉 PRO ALTOOO E AVANTEEEE! ';
+                        resultDiv.className = 'quiz-result correct';
+                    } else {
+                        this.classList.add('wrong');
+                        // Mostrar a resposta correta
+                        allButtons.forEach(btn => {
+                            if (btn.getAttribute('data-correct') === 'true') {
+                                btn.classList.add('correct');
+                            }
+                        });
+                        resultDiv.textContent = '💔 CUUU VC ERROU! QUERO TERMINAR! ';
+                        resultDiv.className = 'quiz-result wrong';
+                    }
+                });
+            });
+        }
+
+        // Inicializar
+        createHearts();
+        setupQuiz();
+    </script>
+</body>
+</html>
